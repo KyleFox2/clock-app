@@ -1,0 +1,76 @@
+/* Global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}  
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  background: linear-gradient(rgb(252, 160, 117),rgb(234, 143, 148));
+}
+
+/* Nav styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 60px 10px;
+  box-shadow: 0 5px 5px -5px rgb(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  min-width: 100%;
+  white-space:nowrap;
+}
+
+li, a {
+  text-decoration: none;
+  list-style: none;
+  display: inline-block;
+  margin: 0px 10px 0px;
+  font-size: 1.2rem;
+  padding: 10px;
+  color: #ffffff;
+}
+
+li:hover {
+  color: rgb(252, 255, 255,0.5);
+  background-color: rgb(252, 255, 255,0.1);
+  border-radius: 10%;
+}
+
+/* Footer */
+footer {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 50px;
+  bottom: 0px;
+}
+
+/* Digital Clock */
+.container {
+  display: grid;
+  justify-content: flex-end; 
+  align-items: end;
+}
+
+.time {
+  font-size: 15rem;
+}
+
+.date {
+  display: flex;
+  font-size: 3rem;
+  justify-content: end;
+}
