@@ -5,7 +5,7 @@ class Clock {
     this.date = new Date();
   }
   
-  //Gets the current time and returns formated as hh:mm:ss
+  //gets the current time and returns formated as hh:mm:ss
   time() {
     this.hour = (this.date.getHours() < 10 ? '0' : '') + this.date.getHours();
     this.min = (this.date.getMinutes() < 10 ? '0' : '') + this.date.getMinutes();
@@ -13,7 +13,7 @@ class Clock {
     return `${this.hour}:${this.min}:${this.sec}`;
   };
 
-  //Gets the current date and returns formatted as Weekday | DD Month, YYYY | GMT
+  //gets the current date and returns formatted as Weekday | DD Month, YYYY | GMT
   longDateFormat() {
     this.dayName = this.weekdays[this.date.getDay()];
     this.monthDay = this.date.getDate();
