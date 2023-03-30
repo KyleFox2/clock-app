@@ -12,7 +12,7 @@ app.get('/stopwatch', (req,res) => {
 });
 
 app.get('/timer', (req,res) => {
-  res.render('stopwatch.ejs');
+  res.render('timer.ejs');
 });
 
 app.get('/worldclock', (req,res) => {

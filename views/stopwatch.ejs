@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head.ejs') %>
+<head>
+  <%- include('./partials/head.ejs') %>
+  <script src="stopwatch.js" defer></script>
+</head> 
 <body>
   <%- include('./partials/nav.ejs') %>
-  <div id="container">
-    <div id="time">
-      <span id="output">00:00.00</span>
+  <div class="container">
+    <div class="time">
+      00:00.00
     </div>
-    <button id="start-stop">Start</button>
-    <button id="reset">Reset</button>
+    <div class="btn-container">
+      <button id="reset" class="btn">Reset</button>
+      <button id="start-stop" class="btn">Start</button>
+    </div>
   </div>
-
   <%- include('./partials/footer.ejs') %>
 </body>
 </html>

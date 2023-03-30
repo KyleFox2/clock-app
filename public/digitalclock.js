@@ -1,12 +1,12 @@
-export default class Clock {
+class Clock {
   constructor(timeDisplay, dateDisplay) {
     this.timeDisplay = timeDisplay;
     this.dateDisplay = dateDisplay;
     this.monthsList = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     this.daysList = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];  
     this.date = new Date();
-    this.startInterval()
-  }
+    this.startInterval();
+  };
   
   //gets the current time and returns formated as hh:mm:ss
   time() {
@@ -34,7 +34,12 @@ export default class Clock {
 
   //calls the updateDisplay method every second so that the webpage keeps updating with the current time
   startInterval() {
-    this.updateDisplay()
+    this.updateDisplay();
     setInterval(() => this.updateDisplay(),1000);
-  }
-}
+  };
+};
+
+//gets the span elements from the index.html file and initializes the Clock class
+const timeDisplay = document.querySelector('.time');
+const dateDisplay = document.querySelector('.date');
+const clock = new Clock(timeDisplay, dateDisplay);
