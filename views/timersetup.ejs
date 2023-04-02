@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head.ejs') %>
-<script src="timersetup.js" type="module" defer></script>
+<head>
+  <%- include('./partials/head.ejs') %>
+  <script src="timersetup.js" type="module" defer></script>
+</head>
 <body>
   <%- include('./partials/nav.ejs') %>
   <div class="timer-container">
@@ -27,7 +29,6 @@
       <a id="link" href="/timer"><button class="start">Start</button></a>
     </div>
   </div>
-
   <%- include('./partials/footer.ejs') %>
 </body>
 </html>

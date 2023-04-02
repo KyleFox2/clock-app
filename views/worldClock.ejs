@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head.ejs') %>
+<head>
+  <%- include('./partials/head.ejs') %>
+  <script src="worldclock.js" type="module" defer></script>
+</head>
 <body>
   <%- include('./partials/nav.ejs') %>
+  
+  <div class="worldclock-container">
+    <div class="search-container">
+      <input class="input" type="text" placeholder="Search">
+      <button class="search-btn">🔍</button>
+    </div>
+    <h1 class="timezone">Tokyo</h1>
+    <span class="timezone-output">00:00:00</span>
+    <span class="time-difference">8 hours ahead</span>
+    <span class="weather">20°C ☀️</span>
+  </div>
 
   <%- include('./partials/footer.ejs') %>
 </body>
