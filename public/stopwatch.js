@@ -46,7 +46,7 @@ class Stopwatch {
   //resets the stopwatch to its original state
   resetStopwatch() {
     this.stopStopwatch();
-    this.timeOutput.textContent = '00:00:00';
+    this.timeOutput.textContent = '00:00.00';
     startStopBtn.textContent = 'Start';
     startStopBtn.style.backgroundColor = 'transparent';
 
@@ -76,7 +76,6 @@ const stopwatch = new Stopwatch(timeOutput, startStopBtn);
 //calls the stopwatchStatus when the user clicks the start-stop button
 startStopBtn.addEventListener('click', () => {
   stopwatch.stopwatchStatus();
-  console.log('test');
 });
 
 //calls the resetStopwatch method to reset the stopwatch to its default state

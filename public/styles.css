@@ -98,3 +98,79 @@ footer {
 .btn:hover {
   background-color: rgb(255, 255, 255,0.1);
 }
+
+/* Timer */
+
+.timer-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* grid-template-rows: auto auto; */
+  /* justify-content: center;
+  align-items: center; */
+
+}
+
+.time-info-container {
+  grid-column: span 3;
+  display: flex;
+  justify-content: space-evenly;
+} 
+
+.time-container-without-hyphen {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.time-integer {
+  grid-row: span 2;
+  font-size: 15rem;
+}
+
+.time-info {
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.start-btn-container {
+  padding: 1rem;
+  grid-column: span 3;
+  display: flex;
+  justify-content: center;
+}
+
+.start {
+  border-radius: 5rem;
+  border-color: #ffffff;
+  border-style:solid;
+  background:transparent;
+  font-size: 1.5rem;
+  color: #ffffff;
+  padding: 1rem 5rem 1rem;
+  width:60rem;
+  max-width:60rem;
+}
+
+.up, .down{
+  font-size: 5rem;
+  background-color: transparent;
+  border-color: #ffffff;
+  border-style: solid;
+  color:#ffffff;
+  padding: 0.5rem;
+}
+
+.up:hover, .down:hover, .start:hover{
+  background-color: rgb(255, 255, 255,0.1);
+}
+
+.up {
+  border-bottom: none;
+  border-top-left-radius: 5rem;
+  border-top-right-radius: 5rem;
+}
+
+.down {
+  border-bottom-left-radius: 5rem;
+  border-bottom-right-radius: 5rem;
+}
