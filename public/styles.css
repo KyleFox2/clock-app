@@ -195,7 +195,7 @@ footer {
   padding-bottom: 1rem;
 }
 
-.timezone {
+.timezone-title {
   grid-column: span 2;
   font-size: 4rem;
 }
