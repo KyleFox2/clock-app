@@ -1,7 +1,7 @@
 class TimerSetup {
   constructor() {
-    this.up = '⇑';
-    this.down = '⇓';
+    this.up = '↑';
+    this.down = '↓';
     this.hour = 0;
     this.min = 0;
     this.sec = 0;

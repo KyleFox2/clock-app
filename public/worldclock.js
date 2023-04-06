@@ -7,11 +7,12 @@ class WorldClock {
     this.city;
     this.timeZone = 'Europe/London';
     this.timeZoneData;
+    this.temp
     this.date = new Date();
   }
 
   async getData() {
-    this.timeZoneData = await fetch('https://api.api-ninjas.com/v1/worldtime?city=' + this.city, {
+    this.timeZoneData = fetch('https://api.api-ninjas.com/v1/worldtime?city=' + this.city, {
       method: 'GET',
       headers: { 
         'X-Api-Key': '18rBryBJKd4zxoN6l6Wtsg==J8oIDsXjakyL46bk'
@@ -32,8 +33,20 @@ class WorldClock {
         };
       })
     this.timeDifferenceCalc();
+    this.getWeather();
     //this.updateWorldClockDisplay();
     this.startInterval();
+  };
+
+  async getWeather() {
+
+    this.weatherRequest = fetch(`https://goweather.herokuapp.com/weather/` + this.city)
+      .then(response => response.json())
+      .then(data => this.temp = data.temperature)
+      .catch(error => console.error(error));
+
+    this.updateWorldClockDisplay();
+    
   };
 
   timeDifferenceCalc() {
@@ -43,34 +56,19 @@ class WorldClock {
     this.userChoiceDay = this.day
     this.userChoiceHour = this.hour
     this.timeDifferenceOutput;
-    console.log(this.timeZone)
 
     if (this.timeZone == 'Europe/London') {
       this.timeDifferenceOutput = 'Local time zone';
-      console.log('Local time zone')
     } else if (this.dateDifference == this.day && this.userChoiceHour == this.gmtTime) {
       this.timeDifferenceOutput = 'Same as local time'
-
     } else if (this.dateDifference == this.day) {
-      // if(this.timeDifferenceOutput < 0) {
-      //   this.timeDifferenceOutput = Math.abs(this.timeDifferenceOutput)
-      // }
       this.timeDifferenceOutput = this.gmtTime - this.userChoiceHour
-      console.log(Math.abs(this.timeDifferenceOutput))
-
     } else if (this.dateDifference < this.day) {
       this.userChoiceHour += 24
       this.timeDifferenceOutput = this.gmtTime - this.userChoiceHour
-      console.log(Math.abs(this.timeDifferenceOutput))
-
     } else if (this.dateDifference > this.day) {
       this.gmtTime += 24
       this.timeDifferenceOutput = this.gmtTime - this.userChoiceHour
-
-      console.log(Math.abs(this.timeDifferenceOutput))
-    } else {
-      console.log('Test Failed!')
-      console.log(this.dateDifference, this.day)
     }
 
     this.updateWorldClockDisplay();
@@ -79,8 +77,10 @@ class WorldClock {
   onLoad() {
     this.hour = this.date.getHours();
     this.min = this.date.getMinutes();
-    this.sec = this.date.getSeconds() ;
+    this.sec = this.date.getSeconds();
+    this.city = 'London'
 
+    this.getWeather();
     this.timeDifferenceCalc();
     this.startInterval();
   };
@@ -92,6 +92,8 @@ class WorldClock {
       this.sec.toString().padStart(2, '0')}`;
 
     timeTitle.textContent = this.timeZone;
+
+    weatherOutput.textContent = this.temp;
 
     if (this.timeDifferenceOutput == 'Local time zone') {
       timeDifference.textContent = 'Local time zone'
@@ -141,6 +143,7 @@ const userInput = document.querySelector('input');
 const timeOutput = document.querySelector('.timezone-output')
 const timeTitle = document.querySelector('.timezone-title')
 const timeDifference = document.querySelector('.time-difference')
+const weatherOutput = document.querySelector('.weather')
 
 searchBtn.addEventListener('click', () => {
   if (userInput.value == worldClock.city) {
@@ -153,7 +156,21 @@ searchBtn.addEventListener('click', () => {
   userInput.placeholder = 'Searching...'
   worldClock.stopInterval();
   worldClock.getData();
+});
 
+userInput.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    if (userInput.value == worldClock.city) {
+      userInput.value = ''
+      return
+    }
+  
+    worldClock.city = userInput.value;
+    userInput.value = ''
+    userInput.placeholder = 'Searching...'
+    worldClock.stopInterval();
+    worldClock.getData();
+  }
 });
 
 worldClock.onLoad();
