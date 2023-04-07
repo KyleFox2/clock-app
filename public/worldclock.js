@@ -11,8 +11,9 @@ class WorldClock {
     this.date = new Date();
   }
 
+  //gets the timezone data for the users city choice
   async getData() {
-    this.timeZoneData = fetch('https://api.api-ninjas.com/v1/worldtime?city=' + this.city, {
+    this.timeZoneData = await fetch('https://api.api-ninjas.com/v1/worldtime?city=' + this.city, {
       method: 'GET',
       headers: { 
         'X-Api-Key': '18rBryBJKd4zxoN6l6Wtsg==J8oIDsXjakyL46bk'
@@ -34,46 +35,48 @@ class WorldClock {
       })
     this.timeDifferenceCalc();
     this.getWeather();
-    //this.updateWorldClockDisplay();
     this.startInterval();
   };
 
-  async getWeather() {
+  //gets the weather for the users chosen city
+  getWeather() {
+    this.weatherRequest = fetch(`https://goweather.herokuapp.com/weather/` + this.city, {
+      mode: 'no-cors'
+    })
+    .then(response => response.json())
+    .then(data => this.temp = data.temperature)
+    .catch(error => console.error(error));
 
-    this.weatherRequest = fetch(`https://goweather.herokuapp.com/weather/` + this.city)
-      .then(response => response.json())
-      .then(data => this.temp = data.temperature)
-      .catch(error => console.error(error));
-
-    this.updateWorldClockDisplay();
-    
+    this.updateWorldClockDisplay(); 
   };
 
+  //calculates the time difference between the users local time and the inputed city
   timeDifferenceCalc() {
-    this.getEnglishDate = new Date();
-    this.dateDifference = this.getEnglishDate.getDate()
-    this.gmtTime = this.getEnglishDate.getHours()
-    this.userChoiceDay = this.day
-    this.userChoiceHour = this.hour
-    this.timeDifferenceOutput;
+    this.getLocalDateInformation = new Date();
+
+    this.localDate = this.getLocalDateInformation.getDate()
+    this.localTime = this.getLocalDateInformation.getHours()
+    this.timeDifference;
 
     if (this.timeZone == 'Europe/London') {
-      this.timeDifferenceOutput = 'Local time zone';
-    } else if (this.dateDifference == this.day && this.userChoiceHour == this.gmtTime) {
-      this.timeDifferenceOutput = 'Same as local time'
-    } else if (this.dateDifference == this.day) {
-      this.timeDifferenceOutput = this.gmtTime - this.userChoiceHour
-    } else if (this.dateDifference < this.day) {
-      this.userChoiceHour += 24
-      this.timeDifferenceOutput = this.gmtTime - this.userChoiceHour
-    } else if (this.dateDifference > this.day) {
-      this.gmtTime += 24
-      this.timeDifferenceOutput = this.gmtTime - this.userChoiceHour
+      this.timeDifference = 'Local time zone';
+    } else if (this.localDate == this.day && this.hour == this.localTime) {
+      this.timeDifference = 'Same as local time'
+    } else if (this.localDate == this.day) {
+      this.timeDifference = this.localTime - this.hour
+    } else if (this.localDate < this.day) {
+      this.hour += 24
+      this.timeDifference = this.localTime - this.hour
+    } else if (this.localDate > this.day) {
+      this.localTime += 24
+      this.timeDifference = this.localTime - this.hour
+      console.log(timeDifference)
     }
 
     this.updateWorldClockDisplay();
   };
 
+  //starts the the timer on page load for the users local time
   onLoad() {
     this.hour = this.date.getHours();
     this.min = this.date.getMinutes();
@@ -85,6 +88,7 @@ class WorldClock {
     this.startInterval();
   };
 
+  //updates the page with all the information required for the world clock
   updateWorldClockDisplay() {
     timeOutput.textContent = `
     ${this.hour.toString().padStart(2, '0')}:${
@@ -95,17 +99,18 @@ class WorldClock {
 
     weatherOutput.textContent = this.temp;
 
-    if (this.timeDifferenceOutput == 'Local time zone') {
-      timeDifference.textContent = 'Local time zone'
-    } else if (this.timeDifferenceOutput == 'Same as local time') {
-      timeDifference.textContent = 'Same as local time'
-    } else if (this.timeDifferenceOutput < 0) {
-      timeDifference.textContent = `${Math.abs(this.timeDifferenceOutput)} hours ahead`
-    } else if (this.timeDifferenceOutput > 0) {
-      timeDifference.textContent = `${this.timeDifferenceOutput} hours behind`
+    if (this.timeDifference == 'Local time zone') {
+      timeDifferenceOutput.textContent = 'Local time zone'
+    } else if (this.timeDifference == 'Same as local time') {
+      timeDifferenceOutput.textContent = 'Same as local time'
+    } else if (this.timeDifference < 0) {
+      timeDifferenceOutput.textContent = `${Math.abs(this.timeDifference)} hours ahead`
+    } else if (this.timeDifference > 0) {
+      timeDifferenceOutput.textContent = `${this.timeDifference} hours behind`
     } 
   };
 
+  //starts the digital clock timer and increments it every second
   startInterval() {
     this.interval = setInterval(() => {
       if (this.hour > 22 && this.min > 58 && this.sec > 58){
@@ -142,9 +147,10 @@ const searchBtn = document.querySelector('.search-btn');
 const userInput = document.querySelector('input');
 const timeOutput = document.querySelector('.timezone-output')
 const timeTitle = document.querySelector('.timezone-title')
-const timeDifference = document.querySelector('.time-difference')
+const timeDifferenceOutput = document.querySelector('.time-difference')
 const weatherOutput = document.querySelector('.weather')
 
+//gets the data and updates the page when user clicks the search button
 searchBtn.addEventListener('click', () => {
   if (userInput.value == worldClock.city) {
     userInput.value = ''
@@ -158,6 +164,7 @@ searchBtn.addEventListener('click', () => {
   worldClock.getData();
 });
 
+//gets the data and updates the page when user clicks the enter key
 userInput.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
     if (userInput.value == worldClock.city) {
@@ -173,4 +180,5 @@ userInput.addEventListener('keypress', function (e) {
   }
 });
 
+//starts the local clock when the page loads
 worldClock.onLoad();
