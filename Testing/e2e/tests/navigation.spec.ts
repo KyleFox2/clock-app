@@ -3,7 +3,7 @@ import { startUp } from "../support/commands";
 
 test.describe("navigation functionality", () => {
   test("visual checks", async ({ page }) => {
-    await startUp(page);
+    await startUp(page, "");
 
     //Opens up the application and checks that all the navigation buttons are present and valid
     await expect(page.getByRole("link", { name: "Clock App" })).toBeVisible();
@@ -21,7 +21,7 @@ test.describe("navigation functionality", () => {
   });
 
   test("navigation functionality checks", async ({ page }) => {
-    await startUp(page);
+    await startUp(page, "");
 
     //Checks the buttons link to the correct page and verifys against the url
     await page.getByRole("link", { name: "World Clock" }).click();
