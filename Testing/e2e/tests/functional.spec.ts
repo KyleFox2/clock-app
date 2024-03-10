@@ -112,15 +112,47 @@ test.describe("timer tests", () => {
 });
 
 test.describe("world clock tests", () => {
-  test("4", async ({ page }) => {
-    await startUp(page, "");
+  test("element presense check", async ({ page }) => {
+    await startUp(page, "worldclock");
 
-    //
+    //checks that all the features are on the page
+    await expect(page.locator("body")).toContainText("Europe/London");
+    await expect(page.locator("body")).toContainText("Local time zone");
+    await expect(page.getByPlaceholder("Search")).toBeVisible();
+    await expect(page.getByRole("button", { name: "🔍" })).toBeVisible();
+    await expect(page.getByPlaceholder("search")).toBeVisible();
+    await expect(page.locator(".timezone-output")).toBeVisible();
+    await expect(page.locator(".timezone-output")).toContainText(
+      await getTime()
+    );
   });
 
-  test("5", async ({ page }) => {
-    await startUp(page, "");
+  test("search bar error message", async ({ page }) => {
+    await startUp(page, "worldclock");
 
-    //
+    //Checks that the app doesn't fall over when an invalid input is entered
+    await page.getByPlaceholder("Search").click();
+    await page.getByPlaceholder("Search").fill("12345678912");
+    await page.getByPlaceholder("Search").press("Enter");
+    await expect(
+      page.getByPlaceholder("Could not find that city")
+    ).toBeVisible();
+    await expect(page.locator("body")).toContainText("Europe/London");
+    await expect(page.locator("body")).toContainText("Local time zone");
+  });
+
+  test("world clock api test", async ({ page }) => {
+    await startUp(page, "worldclock");
+
+    //Checks that the world clock api is functional and updates the screen accordingly
+    await page.getByPlaceholder("Search").click();
+    await page.getByPlaceholder("Search").fill("tokyo");
+    await page.getByRole("button", { name: "🔍" }).click();
+    await expect(page.locator("body")).toContainText("Asia/Tokyo");
+    await expect(page.locator("body")).toContainText("9 hours ahead");
+    await page.getByPlaceholder("Search").fill("bergen");
+    await page.getByPlaceholder("Search").press("Enter");
+    await expect(page.locator("body")).toContainText("Europe/Oslo");
+    await expect(page.locator("body")).toContainText("1 hours ahead");
   });
 });

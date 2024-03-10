@@ -18,9 +18,10 @@ export async function getTime() {
   const date = new Date();
 
   //gets the current time and returns it in formatted way
-  return `${date.getHours().toLocaleString()}:${date
-    .getMinutes()
-    .toLocaleString()}:${date.getSeconds().toLocaleString()}`;
+  const hour = (date.getHours() < 10 ? "0" : "") + date.getHours();
+  const min = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
+  const sec = (date.getSeconds() < 10 ? "0" : "") + date.getSeconds();
+  return `${hour}:${min}:${sec}`;
 }
 
 export async function getDate() {
