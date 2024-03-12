@@ -3,9 +3,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}  
+}
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
 }
@@ -15,7 +16,7 @@ body {
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  background: linear-gradient(rgb(252, 160, 117),rgb(234, 143, 148));
+  background: linear-gradient(rgb(252, 160, 117), rgb(234, 143, 148));
 }
 
 /* Nav styles */
@@ -24,18 +25,19 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 60px 10px;
-  box-shadow: 0 5px 5px -5px rgb(0,0,0,0.1);
+  box-shadow: 0 5px 5px -5px rgb(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
   min-width: 100%;
-  white-space:nowrap;
+  white-space: nowrap;
 }
 /* 
 .nav-title {
   padding:0.5rem;
 } */
 
-li, a {
+li,
+a {
   text-decoration: transparent;
   list-style: none;
   display: inline-block;
@@ -45,9 +47,9 @@ li, a {
   color: #ffffff;
 }
 
- .nav-links:hover {
-  color: rgb(252, 255, 255,0.5);
-  background-color: rgb(252, 255, 255,0.1);
+.nav-links:hover {
+  color: rgb(252, 255, 255, 0.5);
+  background-color: rgb(252, 255, 255, 0.1);
   border-radius: 2rem;
 }
 
@@ -65,7 +67,7 @@ footer {
 /* Digital Clock */
 .container {
   display: grid;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   align-items: end;
 }
 
@@ -93,14 +95,14 @@ footer {
   /* padding: 2rem 4rem; */
   border-radius: 5rem;
   border-color: #ffffff;
-  border-style:solid;
-  background:none;
+  border-style: solid;
+  background: none;
   font-size: 1.5rem;
   color: #ffffff;
   display: inline-block;
 }
 .btn:hover {
-  background-color: rgb(255, 255, 255,0.1);
+  background-color: rgb(255, 255, 255, 0.1);
 }
 
 /* Timer */
@@ -110,14 +112,13 @@ footer {
   /* grid-template-rows: auto auto; */
   /* justify-content: center;
   align-items: center; */
-
 }
 
 .time-info-container {
   grid-column: span 3;
   display: flex;
   justify-content: space-evenly;
-} 
+}
 
 .time-container-without-hyphen {
   display: grid;
@@ -145,26 +146,29 @@ footer {
 .start {
   border-radius: 5rem;
   border-color: #ffffff;
-  border-style:solid;
-  background:transparent;
+  border-style: solid;
+  background: transparent;
   font-size: 1.5rem;
   color: #ffffff;
   padding: 1rem 5rem 1rem;
-  width:60rem;
-  max-width:60rem;
+  width: 60rem;
+  max-width: 60rem;
 }
 
-.up, .down{
+.up,
+.down {
   font-size: 5rem;
   background-color: transparent;
   border-color: #ffffff;
   border-style: solid;
-  color:#ffffff;
+  color: #ffffff;
   padding: 0.5rem;
 }
 
-.up:hover, .down:hover, .start:hover{
-  background-color: rgb(255, 255, 255,0.1);
+.up:hover,
+.down:hover,
+.start:hover {
+  background-color: rgb(255, 255, 255, 0.1);
 }
 
 .up {
@@ -191,7 +195,7 @@ footer {
   grid-column: span 2;
   display: flex;
   justify-content: space-between;
-  margin:0 2rem;
+  margin: 0 2rem;
   padding-bottom: 1rem;
 }
 
@@ -211,14 +215,14 @@ footer {
 .weather {
   font-size: 2.5rem;
   display: flex;
-  justify-content:flex-end;
+  justify-content: flex-end;
   padding-right: 2rem;
 }
 
 .time-difference {
   font-size: 2.5rem;
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   padding-left: 2rem;
   /* width: fit-content; */
 }
@@ -235,7 +239,7 @@ footer {
 }
 
 .search-btn:hover {
-  background-color: rgb(255, 255, 255,0.1);
+  background-color: rgb(255, 255, 255, 0.1);
 }
 
 .input {
@@ -251,8 +255,8 @@ footer {
 }
 
 ::placeholder {
-  color: rgb(255, 255, 255,0.6);
-  font-family: 'Times New Roman', Times, serif;
+  color: rgb(255, 255, 255, 0.6);
+  font-family: "Times New Roman", Times, serif;
 }
 
 .input:focus {
