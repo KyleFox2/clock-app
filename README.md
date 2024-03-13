@@ -26,8 +26,9 @@ The Clock App project demonstrates the implementation of a comprehensive time-te
 
 ## How to Use
 
-1. Clone the repository:
-   git clone https://github.com/yourusername/clock-app.git
+Clone the repository:
+git clone https://github.com/yourusername/clock-app.git  
+
 Navigate to the app's directory:
 
 cd clock-app
@@ -45,6 +46,7 @@ The Clock App project emphasizes testing to ensure the reliability and functiona
 **Unit Testing**  
 Run unit tests:  
 npm test  
+
 **End-to-End Testing**  
 Run end-to-end tests:  
 npx playwright test
