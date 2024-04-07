@@ -16,6 +16,12 @@ The Clock App project demonstrates the implementation of a comprehensive time-te
   - Presents weather conditions for selected cities.
   - Indicates the time difference from the user's current location.
 
+## Testing
+
+- Test cases in Excel, check [this Google Sheets document](https://docs.google.com/spreadsheets/d/1IDsBZjnm13Ysvrefxdw6lQETGhbwEpq07cq6NVfk_jM/edit?usp=sharing).
+- Automation Summaries:
+  - Jest, check [this screenshot](https://drive.google.com/file/d/130Jvf4OeI-K5ZJpRxCwsJtwQjBNy81r5/view?usp=sharing).
+  - Playwright, check [this screenshot](https://drive.google.com/file/d/1mOFvBz99-hzzDvEVfcuTxMns0zG6U7BT/view?usp=sharing).  
 ## Technology Stack
 
 - JavaScript
