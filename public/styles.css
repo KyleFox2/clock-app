@@ -15,8 +15,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
-  background: linear-gradient(rgb(252, 160, 117), rgb(234, 143, 148));
+  color: black;
+  background: #d9e2d2;
 }
 
 /* Nav styles */
@@ -44,7 +44,7 @@ a {
   margin: 0px 10px 0px;
   font-size: 1.2rem;
   padding: 10px;
-  color: #ffffff;
+  color: black;
 }
 
 .nav-links:hover {
@@ -94,11 +94,11 @@ footer {
   max-height: 4rem;
   /* padding: 2rem 4rem; */
   border-radius: 5rem;
-  border-color: #ffffff;
+  border-color: black;
   border-style: solid;
   background: none;
   font-size: 1.5rem;
-  color: #ffffff;
+  color: black;
   display: inline-block;
 }
 .btn:hover {
@@ -145,11 +145,11 @@ footer {
 
 .start {
   border-radius: 5rem;
-  border-color: #ffffff;
+  border-color: black;
   border-style: solid;
   background: transparent;
   font-size: 1.5rem;
-  color: #ffffff;
+  color: black;
   padding: 1rem 5rem 1rem;
   width: 60rem;
   max-width: 60rem;
@@ -159,9 +159,9 @@ footer {
 .down {
   font-size: 5rem;
   background-color: transparent;
-  border-color: #ffffff;
+  border-color: black;
   border-style: solid;
-  color: #ffffff;
+  color: black;
   padding: 0.5rem;
 }
 
@@ -232,7 +232,7 @@ footer {
   padding: 1rem;
   margin: 0;
   /* width: fit-content; */
-  border: #ffffff;
+  border: black;
   border-style: solid;
   background-color: transparent;
   font-size: 1rem;
@@ -248,14 +248,14 @@ footer {
   padding: 0.5rem 1rem;
   margin: 0;
   font-size: 2rem;
-  border: #ffffff;
+  border: black;
   border-style: solid;
   background-color: transparent;
-  color: #ffffff;
+  color: black;
 }
 
 ::placeholder {
-  color: rgb(255, 255, 255, 0.6);
+  color: black;
   font-family: "Times New Roman", Times, serif;
 }
 
