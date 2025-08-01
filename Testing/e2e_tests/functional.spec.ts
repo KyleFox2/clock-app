@@ -76,7 +76,7 @@ test.describe("Stopwatch", () => {
 
     await test.step("Reset and confirm stopwatch returns to zero", async () => {
       await resetButton.click();
-      await expect(body).toContainText("00:00.00");
+      await expect(body).toContainText("00:00.00--yuk");
     });
   });
 });
