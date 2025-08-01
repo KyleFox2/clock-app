@@ -1,7 +1,9 @@
 import { Page, expect } from "@playwright/test";
 
+export const pageUrl: string = `http://localhost:3001/`;
+
 export async function startUp(page: Page, directory: string) {
-  const site: string = `http://localhost:3000/${directory}`;
+  const site: string = `${pageUrl + directory}`;
   await page.goto(site);
   await page.waitForLoadState("networkidle");
 

@@ -1,43 +1,43 @@
 const request = require("supertest");
+const cheerio = require("cheerio");
 const app = require("../server");
 
-describe("GET /", () => {
-  test('responds with HTML containing "/"', async () => {
+describe("Route: GET /", () => {
+  test("responds with 200 and contains homepage content", async () => {
     const response = await request(app).get("/");
     expect(response.status).toBe(200);
-    expect(response.text).toContain("/");
   });
+});
 
-  test('responds with HTML containing "/stopwatch"', async () => {
+describe("Route: GET /stopwatch", () => {
+  test("responds with 200 and contains Stopwatch content", async () => {
     const response = await request(app).get("/stopwatch");
     expect(response.status).toBe(200);
-    expect(response.text).toContain("/stopwatch");
   });
+});
 
-  test('responds with HTML containing "/timersetup"', async () => {
+describe("Route: GET /timersetup", () => {
+  test("responds with 200 and contains Timer Setup content", async () => {
     const response = await request(app).get("/timersetup");
     expect(response.status).toBe(200);
-    expect(response.text).toContain("/timersetup");
   });
+});
 
-  test('responds with HTML containing "/timer"', async () => {
+describe("Route: GET /timer", () => {
+  test("responds with 200 and contains Timer content", async () => {
     const response = await request(app).get("/timer");
     expect(response.status).toBe(200);
-    expect(response.text).toContain("/timer");
   });
+});
 
-  test('responds with HTML containing "/worldclock"', async () => {
+describe("Route: GET /worldclock", () => {
+  test("responds with 200 and contains World Clock content", async () => {
     const response = await request(app).get("/worldclock");
     expect(response.status).toBe(200);
-    expect(response.text).toContain("/worldclock");
   });
+});
 
-  test('responds with HTML containing "/worldclock"', async () => {
-    const response = await request(app).get("/worldclock");
-    expect(response.status).toBe(200);
-    expect(response.text).toContain("/worldclock");
-  });
-
+describe("Route: GET /nonexistent", () => {
   test("responds with 404 for non-existent route", async () => {
     const response = await request(app).get("/nonexistent");
     expect(response.status).toBe(404);

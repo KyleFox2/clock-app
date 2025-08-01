@@ -18,6 +18,7 @@
     "supertest": "^6.3.4"
   },
   "scripts": {
-    "test": "set PORT=3001 && jest -- unit_tests.test.js"
+    "test": "set PORT=3001 && jest -- unit_tests.test.js",
+    "test:e2e": "playwright test -- Testing/e2e_tests"
   }
 }

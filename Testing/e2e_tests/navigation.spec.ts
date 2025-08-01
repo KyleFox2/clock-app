@@ -1,41 +1,75 @@
 import { test, expect } from "@playwright/test";
 import { startUp } from "../support/commands";
 
-test.describe("navigation functionality", () => {
-  test("visual checks", async ({ page }) => {
-    await startUp(page, "");
+test.describe("Navigation Functionality", () => {
+  test("displays all navigation links and headings correctly", async ({
+    page,
+  }) => {
+    await test.step("Load the homepage", async () => {
+      await startUp(page, "");
+    });
 
-    //Opens up the application and checks that all the navigation buttons are present and valid
-    await expect(page.getByRole("link", { name: "Clock App" })).toBeVisible();
-    await expect(page.getByRole("heading")).toContainText("Clock App");
-    await expect(
-      page.getByRole("link", { name: "Digital Clock" })
-    ).toBeVisible();
-    await expect(page.getByRole("list")).toContainText("Digital Clock");
-    await expect(page.getByRole("link", { name: "Stopwatch" })).toBeVisible();
-    await expect(page.getByRole("list")).toContainText("Stopwatch");
-    await expect(page.getByRole("link", { name: "Timer" })).toBeVisible();
-    await expect(page.getByRole("list")).toContainText("Timer");
-    await expect(page.getByRole("link", { name: "World Clock" })).toBeVisible();
-    await expect(page.getByRole("list")).toContainText("World Clock");
+    await test.step("Check logo and main heading", async () => {
+      const appLink = page.getByRole("link", { name: "Clock App" });
+      const heading = page.getByRole("heading");
+      await expect(appLink).toBeVisible();
+      await expect(heading).toContainText("Clock App");
+    });
+
+    await test.step("Verify all navigation links are visible and labeled", async () => {
+      const navList = page.getByRole("list");
+      const navLabels = ["Digital Clock", "Stopwatch", "Timer", "World Clock"];
+
+      for (const label of navLabels) {
+        const link = page.getByRole("link", { name: label });
+        await expect(link).toBeVisible();
+        await expect(navList).toContainText(label);
+      }
+    });
   });
 
-  test("navigation functionality checks", async ({ page }) => {
+  test("navigates correctly between all pages", async ({ page }) => {
     await startUp(page, "");
 
-    //Checks the buttons link to the correct page and verifys against the url
-    await page.getByRole("link", { name: "World Clock" }).click();
-    await expect(page.url()).toBe("http://localhost:3000/worldclock");
-    await page.getByRole("link", { name: "Timer" }).click();
-    await expect(page.url()).toBe("http://localhost:3000/timersetup");
-    await page.locator("#hour").getByRole("button", { name: "↑" }).click();
-    await page.getByRole("button", { name: "Start" }).click();
-    await expect(page.url()).toBe("http://localhost:3000/timer");
-    await page.getByRole("link", { name: "Clock App" }).click();
-    await expect(page.url()).toBe("http://localhost:3000/");
-    await page.getByRole("link", { name: "Stopwatch" }).click();
-    await expect(page.url()).toBe("http://localhost:3000/stopwatch");
-    await page.getByRole("link", { name: "Digital Clock" }).click();
-    await expect(page.url()).toBe("http://localhost:3000/");
+    await test.step("Navigate to World Clock", async () => {
+      const worldClockLink = page.getByRole("link", { name: "World Clock" });
+      await worldClockLink.click();
+      await expect(page).toHaveURL(/\/worldclock$/);
+    });
+
+    await test.step("Navigate to Timer Setup and start a timer", async () => {
+      const timerLink = page.getByRole("link", { name: "Timer" });
+      await timerLink.click();
+      await expect(page).toHaveURL(/\/timersetup$/);
+
+      const hourUpButton = page
+        .locator("#hour")
+        .getByRole("button", { name: "↑" });
+      const startButton = page.getByRole("button", { name: "Start" });
+
+      await hourUpButton.click();
+      await startButton.click();
+      await expect(page).toHaveURL(/\/timer$/);
+    });
+
+    await test.step("Return to homepage via Clock App link", async () => {
+      const homeLink = page.getByRole("link", { name: "Clock App" });
+      await homeLink.click();
+      await expect(page).toHaveURL(/\/$/);
+    });
+
+    await test.step("Navigate to Stopwatch", async () => {
+      const stopwatchLink = page.getByRole("link", { name: "Stopwatch" });
+      await stopwatchLink.click();
+      await expect(page).toHaveURL(/\/stopwatch$/);
+    });
+
+    await test.step("Return to Digital Clock", async () => {
+      const digitalClockLink = page.getByRole("link", {
+        name: "Digital Clock",
+      });
+      await digitalClockLink.click();
+      await expect(page).toHaveURL(/\/$/);
+    });
   });
 });
